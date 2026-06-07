@@ -1,12 +1,45 @@
 # Zero Secure Tenant Using Microsoft Entra ID P1
 
-A Zero Trust Identity and Access Management project for fog/edge computing built on Microsoft Entra ID P1 and Azure.
+[![Microsoft Entra ID](https://img.shields.io/badge/Identity-Microsoft%20Entra%20ID-0078D4?logo=microsoftazure&logoColor=white)](docs/project-report.md)
+[![Azure](https://img.shields.io/badge/Cloud-Microsoft%20Azure-0089D6?logo=microsoftazure&logoColor=white)](docs/project-report.md)
+[![Zero Trust](https://img.shields.io/badge/security-Zero%20Trust-6f42c1)](docs/project-report.md)
+[![IoT Edge](https://img.shields.io/badge/fog-Azure%20IoT%20Edge-0A66C2)](docs/project-report.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-This repository documents an academic project that demonstrates how fog nodes can be treated as verifiable cloud identities instead of implicitly trusted network devices. The implementation combines Microsoft Entra ID, Azure IoT Hub, Azure IoT Edge, custom RBAC, and Azure Monitor / Log Analytics to enforce least privilege and maintain an audit trail.
+Zero Trust identity and access management project for fog and edge computing on Microsoft Entra ID and Azure.
 
-Important note: the original report and presentation artifacts in the working folder contained sensitive environment details and credential-like values. This repository keeps a sanitized, GitHub-safe project summary instead of publishing those raw documents.
+## Overview
 
-## Project Overview
+Zero Secure Tenant is an academic cloud-security project that demonstrates how fog nodes can be treated as verifiable cloud identities instead of implicitly trusted network devices. The implementation combines Microsoft Entra ID, Azure IoT Hub, Azure IoT Edge, custom RBAC, and Azure Monitor / Log Analytics to enforce least privilege and maintain an audit trail.
+
+Important note: the original report and presentation artifacts in the working folder contained sensitive environment details and credential-like values. This repository keeps sanitized project documentation instead of publishing unsafe raw materials as the primary narrative.
+
+For a cleaner technical write-up, see `docs/project-report.md`.
+
+## Why this project matters
+
+- Shows how Zero Trust concepts can be applied to fog and edge computing
+- Connects identity security with cloud infrastructure and IoT operations
+- Demonstrates least privilege and auditability in a realistic Azure environment
+- Documents governance and licensing constraints that affect real deployments
+- Highlights practical security engineering instead of only theoretical architecture
+
+## Skills demonstrated
+
+This project highlights skills that are useful to recruiters evaluating cloud, IAM, and cybersecurity work:
+
+- Microsoft Entra ID and Azure identity architecture
+- Zero Trust security design and access-control modeling
+- Azure IoT Hub and Azure IoT Edge deployment concepts
+- Service principal and application registration workflows
+- Custom RBAC role design and least-privilege enforcement
+- Cloud monitoring, diagnostics, and Log Analytics integration
+- Kusto Query Language (KQL) for audit and security analysis
+- Technical risk documentation and security-focused reporting
+- Working within governance, licensing, and tenant restrictions
+- Sanitizing architecture evidence for safe public documentation
+
+## Project overview
 
 Traditional fog computing environments often trust devices based on network location. That model increases the risk of lateral movement, compromised edge devices, and insider abuse. Zero Secure Tenant applies a Zero Trust approach where every fog node, service principal, and user must be explicitly authenticated and authorized before accessing cloud resources.
 
@@ -19,36 +52,32 @@ Core idea:
 ## Objectives
 
 - Implement a Zero Trust IAM architecture using Microsoft Entra ID
-- Authenticate fog nodes through Azure identities / service principals
+- Authenticate fog nodes through Azure identities and service principals
 - Deploy Azure IoT Hub and IoT Edge as the fog computing layer
 - Enforce least-privilege access with custom RBAC roles
 - Collect audit evidence with Azure Monitor and Log Analytics
 - Document real-world institutional governance constraints encountered during implementation
 
-## Architecture Summary
+## Architecture summary
 
 The system was structured in five layers:
 
-1. Identity Layer
+1. Identity layer
    - Microsoft Entra ID
    - App Registration / Service Principal
-
-2. Fog Infrastructure Layer
+2. Fog infrastructure layer
    - Azure IoT Hub
-
-3. Fog Node Layer
+3. Fog node layer
    - Azure VM running Ubuntu 24.04
    - Azure IoT Edge runtime
-
-4. Access Control Layer
+4. Access control layer
    - Custom RBAC roles for administrator, operator, and auditor responsibilities
-
-5. Monitoring and Audit Layer
+5. Monitoring and audit layer
    - Log Analytics Workspace
    - Diagnostic Settings
    - KQL audit queries
 
-## Zero Trust Principles Applied
+## Zero Trust principles applied
 
 | Principle | Implementation |
 |---|---|
@@ -58,30 +87,30 @@ The system was structured in five layers:
 | Verify Explicitly | IoT Hub identity and TLS validation are checked continuously |
 | Just-In-Time Access | Identified as a future enhancement requiring Entra ID P2 / PIM |
 
-## Main Components
+## Main components
 
 - Microsoft Entra ID P1
 - Azure App Registration / Service Principal
-- Azure IoT Hub (F1 tier used in the academic deployment)
+- Azure IoT Hub
 - Azure VM for fog node simulation
 - Azure IoT Edge runtime
 - Custom Azure RBAC roles
 - Azure Monitor + Log Analytics Workspace
 - KQL-based audit and verification queries
 
-## Implementation Notes
+## Implementation notes
 
-### Phase 1: Environment and Identity Setup
+### Phase 1: Environment and identity setup
 - Verified availability of an Azure for Students subscription and Entra ID P1 licensing
 - Created an app registration to serve as the fog node identity anchor
 - Treated the service principal as the cloud identity for the fog node
 
-### Phase 2: Zero Trust Foundation
+### Phase 2: Zero Trust foundation
 - Assessed tenant-level controls available in the academic environment
 - Documented governance restrictions around security defaults, conditional access, and privileged identity features
 - Pivoted to controls available at the subscription and resource layers
 
-### Phase 3: Fog Computing Layer
+### Phase 3: Fog computing layer
 - Deployed Azure IoT Hub
 - Registered IoT Edge devices representing fog nodes
 - Deployed an Ubuntu VM to simulate a fog node
@@ -89,13 +118,13 @@ The system was structured in five layers:
 - Verified runtime health and upstream connectivity
 - Authenticated the fog node identity against Entra ID
 
-### Phase 4: Access Control and Monitoring
+### Phase 4: Access control and monitoring
 - Created custom RBAC roles to separate duties
 - Configured Log Analytics for centralized audit logging
 - Enabled diagnostics for IoT Hub and Azure activity logs
 - Wrote KQL queries to capture IAM and IoT security evidence
 
-## RBAC Model
+## RBAC model
 
 The project used role separation to support Zero Trust access control:
 
@@ -108,7 +137,7 @@ The project used role separation to support Zero Trust access control:
 
 This separation demonstrates least privilege and separation of duties.
 
-## Validation and Results
+## Validation and results
 
 The original report documented the following successful tests:
 
@@ -128,9 +157,9 @@ Summary of findings:
 - Unauthorized destructive actions were denied
 - KQL queries captured IAM and IoT audit evidence
 
-## Sample KQL Queries
+## Sample KQL queries
 
-### Azure Activity / IAM Audit Trail
+### Azure Activity / IAM audit trail
 ```kusto
 AzureActivity
 | project TimeGenerated, OperationNameValue, ActivityStatusValue, CallerIpAddress, Caller
@@ -138,7 +167,7 @@ AzureActivity
 | take 20
 ```
 
-### IoT Hub Connection Events
+### IoT Hub connection events
 ```kusto
 AzureDiagnostics
 | where ResourceType == "IOTHUBS"
@@ -147,7 +176,7 @@ AzureDiagnostics
 | take 20
 ```
 
-### Failed Operations
+### Failed operations
 ```kusto
 AzureActivity
 | where ActivityStatusValue == "Failure"
@@ -155,7 +184,7 @@ AzureActivity
 | order by TimeGenerated desc
 ```
 
-### Role Assignment / Infrastructure Changes
+### Role assignment / infrastructure changes
 ```kusto
 AzureActivity
 | where OperationNameValue contains "ROLEASSIGNMENT"
@@ -166,38 +195,31 @@ AzureActivity
 | take 30
 ```
 
-## Real-World Constraints Documented
-
-A major part of the project was documenting what happens when Zero Trust is implemented inside a restricted institutional tenant. Observed limitations included:
-
-- Read-only access to certain tenant-wide security settings
-- Conditional Access policy creation blocked by insufficient privileges
-- Privileged Identity Management unavailable without Entra ID P2
-- Identity Protection unavailable without higher licensing
-- Region and governance restrictions affecting deployment choices
-- Student/non-admin access boundaries that mirror real enterprise governance
-
-These constraints are part of the project outcome, not just limitations. They show how Zero Trust often has to be implemented progressively within organizational boundaries.
-
-## Repository Contents
+## Repository contents
 
 - `README.md` - sanitized project overview derived from the report
+- `LICENSE` - repository license
 - `Azure Template.json` - exported Azure template used in the project
 - `Architecture Diagram.png` - high-level system diagram
 - `Key Vault.png` - supporting architecture artifact
 - `docs/project-report.md` - expanded sanitized notes extracted from the final report
-- `Output Folder/` - project evidence and supporting screenshots, preserved in folder structure:
-  - `Connectivity Checks.png`
-  - `Custom RBAC roles.png`
-  - `Health checks.png`
-  - `IOT HUBDelete.png`
-  - `KQL Queries/`
-  - `Restrictions/`
-  - `Test Cases/`
+- `Output Folder/` - project evidence and supporting screenshots
 
-## Reproducibility Notes
+## Reproducibility notes
 
 This repository is intended as a documentation and architecture reference. If you want to rebuild the project on a personal Azure account, use a fresh tenant and generate new identities, secrets, device registrations, and connection strings. Do not reuse any values from old reports, screenshots, or exports.
+
+## Future work
+
+Potential next steps for extending Zero Secure Tenant:
+
+- add Conditional Access and stronger adaptive identity controls in a tenant with the required privileges
+- integrate Privileged Identity Management for just-in-time administrative access
+- connect alerts to Microsoft Sentinel or another SIEM workflow
+- automate more deployment steps with Bicep, Terraform, or deployment pipelines
+- extend the design to multiple fog nodes and larger IoT device fleets
+- add stronger secret management patterns around Key Vault and rotation workflows
+- evaluate device attestation and stronger workload-identity patterns for edge nodes
 
 ## Conclusion
 
@@ -207,6 +229,10 @@ Zero Secure Tenant demonstrates that fog nodes can be managed as explicit cloud 
 
 - Rahul Yadav
 
-## Academic Context
+## Academic context
 
 This work was developed as a B.Tech CSE project at BML Munjal University under faculty mentorship.
+
+## License
+
+This project is released under the MIT License. See `LICENSE` for details.
