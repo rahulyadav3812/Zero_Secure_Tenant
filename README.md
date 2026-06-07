@@ -1,4 +1,4 @@
-# Zero Secure Tenant
+# Zero Secure Tenant Using Microsoft Entra ID P1
 
 A Zero Trust Identity and Access Management project for fog/edge computing built on Microsoft Entra ID P1 and Azure.
 
