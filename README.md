@@ -186,6 +186,14 @@ These constraints are part of the project outcome, not just limitations. They sh
 - `Architecture Diagram.png` - high-level system diagram
 - `Key Vault.png` - supporting architecture artifact
 - `docs/project-report.md` - expanded sanitized notes extracted from the final report
+- `Output Folder/` - project evidence and supporting screenshots, preserved in folder structure:
+  - `Connectivity Checks.png`
+  - `Custom RBAC roles.png`
+  - `Health checks.png`
+  - `IOT HUBDelete.png`
+  - `KQL Queries/`
+  - `Restrictions/`
+  - `Test Cases/`
 
 ## Reproducibility Notes
 
@@ -195,12 +203,9 @@ This repository is intended as a documentation and architecture reference. If yo
 
 Zero Secure Tenant demonstrates that fog nodes can be managed as explicit cloud identities within a Zero Trust architecture. By combining Entra ID, IoT Hub, IoT Edge, RBAC, and centralized logging, the project shows how authentication, authorization, and auditability can be enforced even in a constrained academic cloud environment.
 
-## Contributors
+## Contributor
 
 - Rahul Yadav
-- Mayank Yadav
-- Piyush Dagar
-- Prince Malhan
 
 ## Academic Context
 
