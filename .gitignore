@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+
+# Sensitive / non-repository source artifacts
+Final_Report_PRJ3.pdf
+presentation.pdf
+presentation.key
+
+# Optional local exports
+*.har
+*.xml
+*.tmp
+*.log
+
+# Python
+__pycache__/
+*.pyc
+
+# Editor files
+.vscode/
+.idea/
